@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "grokbot-gateway",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-19",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "kv_namespaces": [
+    {
+      "binding": "EVENT_DEDUPE",
+      // Replace with `npx wrangler kv namespace create EVENT_DEDUPE` before deploy.
+      "id": "REPLACE_ME"
+    }
+  ]
+}

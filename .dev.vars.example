@@ -1,0 +1,13 @@
+# Secrets — never commit the real .dev.vars file
+SLACK_SIGNING_SECRET=
+SLACK_BOT_TOKEN=
+GROK_WEBHOOK_URL=
+GROK_WEBHOOK_KEY=
+
+# Identity — workspace-specific, not secrets, but do not hardcode in git
+SLACK_ALLOWED_USER_ID=
+SLACK_BOT_USER_ID=
+SLACK_TEAM_ID=
+
+# optional: default is Authorization Bearer
+# GROK_WEBHOOK_KEY_HEADER=X-Webhook-Key
