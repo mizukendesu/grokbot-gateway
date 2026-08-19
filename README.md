@@ -6,6 +6,22 @@ Worker は Slack に返信しません。`chat.postMessage` は呼びません�
 
 このリポジトリは公開する前提です。ワークスペース ID・ユーザー ID・token・webhook URL はソースに書かず、secret / 環境変数に置きます。
 
+## 構成
+
+```
+src/
+  index.ts                 # Worker の入口
+  app.ts                   # Hono アプリ
+  routes/                  # HTTP（Slack Events）
+  application/             # ユースケース（メンション転送）
+  domain/slack/            # 署名・パース・フィルタ・メンション判定
+  domain/webhook/          # 転送 JSON
+  infrastructure/          # KV, Slack API, webhook HTTP, config
+  shared/                  # TTL などの定数
+```
+
+ドメインは I/O を持たない。Slack / KV / 外部 HTTP は infrastructure。Hono は routes だけ。
+
 ## できること
 
 - Slack の `url_verification` challenge をエコーする（署名なし。body サイズ制限あり）
@@ -50,6 +66,7 @@ cp .dev.vars.example .dev.vars
 npm install
 npx wrangler types
 npm run check
+npm test
 npm run dev
 ```
 

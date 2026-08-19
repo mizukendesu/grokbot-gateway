@@ -4,9 +4,9 @@ export type GatewayConfig = {
   allowedUserId: string;
   botUserId: string;
   teamId: string;
-  grokWebhookUrl: string;
-  grokWebhookKey: string;
-  grokWebhookKeyHeader?: string;
+  webhookUrl: string;
+  webhookKey: string;
+  webhookKeyHeader?: string;
 };
 
 function required(value: string | undefined): string | null {
@@ -33,20 +33,20 @@ export function loadConfig(env: Env): GatewayConfig | null {
   const allowedUserId = required(env.SLACK_ALLOWED_USER_ID);
   const botUserId = required(env.SLACK_BOT_USER_ID);
   const teamId = required(env.SLACK_TEAM_ID);
-  const grokWebhookUrl = required(env.GROK_WEBHOOK_URL);
-  const grokWebhookKey = required(env.GROK_WEBHOOK_KEY);
+  const webhookUrl = required(env.GROK_WEBHOOK_URL);
+  const webhookKey = required(env.GROK_WEBHOOK_KEY);
   if (
     !signingSecret ||
     !botToken ||
     !allowedUserId ||
     !botUserId ||
     !teamId ||
-    !grokWebhookUrl ||
-    !grokWebhookKey
+    !webhookUrl ||
+    !webhookKey
   ) {
     return null;
   }
-  if (!isHttpsUrl(grokWebhookUrl)) {
+  if (!isHttpsUrl(webhookUrl)) {
     return null;
   }
 
@@ -61,8 +61,8 @@ export function loadConfig(env: Env): GatewayConfig | null {
     allowedUserId,
     botUserId,
     teamId,
-    grokWebhookUrl,
-    grokWebhookKey,
-    grokWebhookKeyHeader: header || undefined,
+    webhookUrl,
+    webhookKey,
+    webhookKeyHeader: header || undefined,
   };
 }
